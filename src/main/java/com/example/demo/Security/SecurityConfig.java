@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()// перехватчик URL
                 //.antMatchers("/index").permitAll()
-                .antMatchers( "/user/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers( "/user/**", "/webjars/**").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/**").hasRole("ADMIN")
                 .and()
                 .formLogin() // Spring сам подставит свою логин форму
