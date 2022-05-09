@@ -3,24 +3,20 @@ package com.example.demo.Service;
 import com.example.demo.models.Role;
 import com.example.demo.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
 @Service
 public class RoleService {
 
-
     @Autowired
-    RoleRepository roleRepository;
-
+    public RoleRepository roleRepository;
 
     public Set<Role> getAllRoles() {
-        return  new HashSet<>(roleRepository.findAll());
+        return new HashSet<>(roleRepository.findAll());
     }
 
     public void add(Role role) {
@@ -29,7 +25,5 @@ public class RoleService {
 
     public Set<Role> getSetRoles(Set<String> roles) {
         return roleRepository.getSetRoles(roles);
-
     }
-
 }

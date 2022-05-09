@@ -4,7 +4,6 @@ import com.example.demo.Service.RoleService;
 import com.example.demo.Service.UserService;
 import com.example.demo.models.Role;
 import com.example.demo.models.User;
-import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,19 +14,13 @@ import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
-public class AppController {
+public class AdminController {
 
     private final UserService userService;
     private final RoleService roleService;
 
-/*    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;*/
-
     @Autowired
-    private UserRepository userRepo;
-
-    @Autowired
-    public AppController(UserService userService, RoleService roleService) {
+    public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
@@ -51,7 +44,6 @@ public class AppController {
                                           defaultValue = "ROLE_USER") Set<String> roles) {
         Set<Role> setRoles = roleService.getSetRoles(roles);
         user.setRoles(setRoles);
-        //user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userService.save(user);
         return "register_success";
     }
@@ -60,7 +52,7 @@ public class AppController {
     public String listUsers(Model model) {
         List<User> listUsers = userService.getAllUsers();
         model.addAttribute("listUsers", listUsers);
-        return "/users";
+        return "usersForm";
     }
 
     @GetMapping("/users/edit/{id}")
@@ -69,12 +61,11 @@ public class AppController {
         Set<Role> listRoles = roleService.getAllRoles();
         model.addAttribute("user", user);
         model.addAttribute("listRoles", listRoles);
-        return "user_form";
+        return "user_editForm";
     }
 
     @PostMapping("/users/save")
     public String saveUser(User user) {
-     //   user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userService.save(user);
         return "redirect:/admin/users";
     }
@@ -85,5 +76,4 @@ public class AppController {
         userService.delete(user);
         return "redirect:/admin/users";
     }
-
 }
