@@ -3,7 +3,6 @@ package com.example.demo.Service;
 import com.example.demo.models.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,11 +16,8 @@ import java.util.List;
 public class UserService implements UserDetailsService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
-
-
     @Autowired
     UserRepository userRepository;
-
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -43,7 +39,6 @@ public class UserService implements UserDetailsService {
     public User getById(long id) {
         return userRepository.getById(id);
     }
-
 
     public User getUserByUserName(String email) {
         return userRepository.getUserByEmail(email);

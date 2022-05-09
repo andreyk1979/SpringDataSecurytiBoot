@@ -2,9 +2,7 @@ package com.example.demo.Security;
 
 import com.example.demo.Service.RoleService;
 import com.example.demo.Service.UserService;
-import com.example.demo.models.Role;
-import com.example.demo.models.User;
-import com.example.demo.repository.RoleRepository;
+import com.example.demo.models.User;  //Создание админа в БД через @PostConstruct
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,8 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.annotation.PostConstruct;
-import java.util.stream.Collectors;
+import javax.annotation.PostConstruct; //Создание админа в БД через @PostConstruct
 
 @Configuration
 @EnableWebSecurity
@@ -40,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);// предоставляет юзеров.Чтоб понимал
+        authProvider.setUserDetailsService(userDetailsService);// предоставляет юзеров
         authProvider.setPasswordEncoder(passwordEncoder());// ПОДКЛЮЧАЕМ  его
         return authProvider;
     }
@@ -52,45 +49,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()// перехватчик URL
-                //.antMatchers("/index").permitAll()
-                .antMatchers( "/user/**", "/webjars/**").hasAnyRole("ADMIN", "USER")
+        http.authorizeRequests()// перехватывает URL
+                .antMatchers("/user/**", "/webjars/**").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/**").hasRole("ADMIN")
                 .and()
-                .formLogin() // Spring сам подставит свою логин форму
-                .successHandler(successUserHandler) // подключаем наш SuccessHandler для перенеправления по ролям
+                .formLogin() // Spring подставляет стандартную логин форму
+                .successHandler(successUserHandler) // подключаем SuccessHandler для перенеправления по ролям
                 .and()
-                .logout().logoutSuccessUrl("/")// и без него перенаправляет на регистрацию после выхода
+                .logout().logoutSuccessUrl("/")
                 .and()
                 .csrf()
                 .disable();
 
- /*               .antMatchers("/users").authenticated()
-                .anyRequest().permitAll()
-                .and()
-                .formLogin()
-                .usernameParameter("email")
-                .defaultSuccessUrl("/users")
-                .permitAll()
-                .and()
-                .logout().logoutSuccessUrl("/").permitAll();
     }
-*/
-        // Необходимо для шифрования паролей
-        //
-    }
-/*
-        @Bean
-        public BCryptPasswordEncoder passwordEncoder() {
-            return new BCryptPasswordEncoder();
-        }*/
-
-
+        //Создание админа в БД
 /*    @PostConstruct
     private void postConstruct() {
-        User admin = new User("andr", "andr1000", "andrey@mail.ru", "100",
+        User admin = new User("Kuimow", "Kuimow", "kuimow@mail.ru", "$2y$10$WJYXsLawkitdHYMTlx4ieuvBDV0Zdov/biPubsjFv64YdbRkBUc7u",
                 roleService.getAllRoles());
         userService.save(admin);
     }*/
 }
-

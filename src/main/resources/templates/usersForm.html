@@ -9,8 +9,8 @@
 </head>
 <body>
 <div class="container text-center">
-    <div>
-        <form th:action="@{/logout}" method="post">
+    <div >
+        <form th:action="@{/logout}" method="get">
             <p>
                 Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
             </p>
