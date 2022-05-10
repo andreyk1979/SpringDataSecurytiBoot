@@ -1,8 +1,7 @@
 package com.example.demo.Security;
 
-import com.example.demo.Service.RoleService;
-import com.example.demo.Service.UserService;
-import com.example.demo.models.User;  //Создание админа в БД через @PostConstruct
+import com.example.demo.Service.RoleServiceImp;
+import com.example.demo.Service.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,20 +13,24 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.annotation.PostConstruct; //Создание админа в БД через @PostConstruct
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final UserServiceImp userService; // используется только для Создание админа в БД
+    private final RoleServiceImp roleService; // используется только для Создание админа в БД
+
+    private final SuccessUserHandler successUserHandler; // класс, в котором описана логика перенаправления пользователей по ролям
+
+    private final UserDetailsService userDetailsService;
+
     @Autowired
-    UserService userService;
-    @Autowired
-    RoleService roleService;
-    @Autowired
-    private SuccessUserHandler successUserHandler; // класс, в котором описана логика перенаправления пользователей по ролям
-    @Autowired
-    private UserDetailsService userDetailsService;
+    public SecurityConfig(UserServiceImp userService, RoleServiceImp roleService, SuccessUserHandler successUserHandler, UserDetailsService userDetailsService) {
+        this.userService = userService;
+        this.roleService = roleService;
+        this.successUserHandler = successUserHandler;
+        this.userDetailsService = userDetailsService;
+    }
 
     @Bean
     public static BCryptPasswordEncoder passwordEncoder() {
@@ -62,10 +65,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable();
 
     }
-        //Создание админа в БД
+    //Создание админа в БД
 /*    @PostConstruct
     private void postConstruct() {
-        User admin = new User("Kuimow", "Kuimow", "kuimow@mail.ru", "$2y$10$WJYXsLawkitdHYMTlx4ieuvBDV0Zdov/biPubsjFv64YdbRkBUc7u",
+        User admin = new User("Kuimov", "Kuimov", "kuimov@mail.ru", "100",
                 roleService.getAllRoles());
         userService.save(admin);
     }*/

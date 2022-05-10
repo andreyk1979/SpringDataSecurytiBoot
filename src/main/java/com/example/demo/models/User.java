@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -18,8 +17,6 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private long id;
-
-
     @Column(name = "first_name")
     private String firstname;
     @Column(name = "last_name")
@@ -28,6 +25,11 @@ public class User implements UserDetails {
     private String email;
     @Column(name = "password")
     private String password;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @Fetch(FetchMode.JOIN)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
     public User(String firstname, String lastname, String email, String password, Set<Role> roles) {
         this.firstname = firstname;
@@ -36,12 +38,6 @@ public class User implements UserDetails {
         this.password = password;
         this.roles = roles;
     }
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @Fetch(FetchMode.JOIN)
-    @JoinTable(name = "users_roles",joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
 
     public User(long id, String firstname, String lastname, String email, String password, Set<Role> roles) {
         this.id = id;
@@ -63,6 +59,10 @@ public class User implements UserDetails {
     @Override
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -98,12 +98,12 @@ public class User implements UserDetails {
         this.firstname = firstname;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
     public String getLastname() {
         return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public long getId() {
@@ -122,19 +122,15 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Set<Role> getRoles() {
         return roles;
     }
 
-    public String getFullName() {
-        return getFirstname() + " " + getLastname();
-    }
-
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getFullName() {
+        return getFirstname() + " " + getLastname();
     }
 }

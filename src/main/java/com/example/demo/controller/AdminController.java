@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.Service.RoleService;
-import com.example.demo.Service.UserService;
+import com.example.demo.Service.RoleServiceImp;
+import com.example.demo.Service.UserServiceImp;
 import com.example.demo.models.Role;
 import com.example.demo.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +16,11 @@ import java.util.Set;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final UserService userService;
-    private final RoleService roleService;
+    private final UserServiceImp userService;
+    private final RoleServiceImp roleService;
 
     @Autowired
-    public AdminController(UserService userService, RoleService roleService) {
+    public AdminController(UserServiceImp userService, RoleServiceImp roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
