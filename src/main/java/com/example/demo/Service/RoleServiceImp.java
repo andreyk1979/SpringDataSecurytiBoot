@@ -31,6 +31,6 @@ public class RoleServiceImp implements RoleService {
 
     @Override
     public Set<Role> getSetRoles(Set<String> roles) {
-        return roleRepository.getSetRoles(roles);
+        return roleRepository.getRolesByNameIn(roles);
     }
 }
