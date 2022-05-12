@@ -1,7 +1,8 @@
 package com.example.demo.Security;
 
-import com.example.demo.Service.RoleServiceImp;
-import com.example.demo.Service.UserServiceImp;
+import com.example.demo.Service.RoleService;
+import com.example.demo.Service.UserDetailsServiceImpl;
+import com.example.demo.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,22 +11,21 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserServiceImp userService; // используется только для Создание админа в БД
-    private final RoleServiceImp roleService; // используется только для Создание админа в БД
+    private final UserService userService; // используется только для Создание админа в БД
+    private final RoleService roleService; // используется только для Создание админа в БД
 
     private final SuccessUserHandler successUserHandler; // класс, в котором описана логика перенаправления пользователей по ролям
 
-    private final UserDetailsService userDetailsService;
+    private final UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    public SecurityConfig(UserServiceImp userService, RoleServiceImp roleService, SuccessUserHandler successUserHandler, UserDetailsService userDetailsService) {
+    public SecurityConfig(UserService userService, RoleService roleService, SuccessUserHandler successUserHandler, UserDetailsServiceImpl userDetailsService) {
         this.userService = userService;
         this.roleService = roleService;
         this.successUserHandler = successUserHandler;

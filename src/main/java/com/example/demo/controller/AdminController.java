@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.Service.RoleServiceImp;
-import com.example.demo.Service.UserServiceImp;
+import com.example.demo.Service.RoleService;
+import com.example.demo.Service.UserService;
 import com.example.demo.models.Role;
 import com.example.demo.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +16,18 @@ import java.util.Set;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final UserServiceImp userService;
-    private final RoleServiceImp roleService;
+    private final UserService userService;
+    private final RoleService roleService;
 
     @Autowired
-    public AdminController(UserServiceImp userService, RoleServiceImp roleService) {
+    public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
 
     @GetMapping("")
-    public String viewHomePage() {
-        return "index";
+    public String viewWelcomePage() {
+        return "welcome_page";
     }
 
     @GetMapping("/register")
@@ -38,7 +38,7 @@ public class AdminController {
     }
 
     @PostMapping("/process_register")
-    public String processRegister(@ModelAttribute User user,
+    public String processUserRegistration(@ModelAttribute User user,
                                   @RequestParam(value = "roless",
                                           required = false,
                                           defaultValue = "ROLE_USER") Set<String> roles) {
@@ -49,7 +49,7 @@ public class AdminController {
     }
 
     @GetMapping("/users")
-    public String listUsers(Model model) {
+    public String showAllUsers(Model model) {
         List<User> listUsers = userService.getAllUsers();
         model.addAttribute("listUsers", listUsers);
         return "usersForm";
