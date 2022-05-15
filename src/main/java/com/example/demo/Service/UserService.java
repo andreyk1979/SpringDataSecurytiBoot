@@ -14,7 +14,7 @@ public interface UserService {
 
     void edit(User user);
 
-    User getById(long id);
+    User getUserById(long id);
 
     User getUserByEmail (String email);
 

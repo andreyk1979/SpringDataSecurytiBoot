@@ -38,7 +38,7 @@ public class UserServiceImp implements UserService {
         userRepository.save(user);
     }
 
-    public User getById(long id) {
+    public User getUserById(long id) {
         return userRepository.getById(id);
     }
 
