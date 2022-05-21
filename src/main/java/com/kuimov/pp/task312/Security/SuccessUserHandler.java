@@ -1,4 +1,4 @@
-package com.example.demo.Security;
+package com.kuimov.pp.task312.Security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;

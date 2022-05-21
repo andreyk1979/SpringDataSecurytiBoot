@@ -1,9 +1,9 @@
-package com.example.demo.controller;
+package com.kuimov.pp.task312.controller;
 
-import com.example.demo.Service.RoleService;
-import com.example.demo.Service.UserService;
-import com.example.demo.models.Role;
-import com.example.demo.models.User;
+import com.kuimov.pp.task312.Service.RoleService;
+import com.kuimov.pp.task312.Service.UserService;
+import com.kuimov.pp.task312.models.Role;
+import com.kuimov.pp.task312.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

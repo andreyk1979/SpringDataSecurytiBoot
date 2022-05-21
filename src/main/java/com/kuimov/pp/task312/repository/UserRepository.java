@@ -1,6 +1,6 @@
-package com.example.demo.repository;
+package com.kuimov.pp.task312.repository;
 
-import com.example.demo.models.User;
+import com.kuimov.pp.task312.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {

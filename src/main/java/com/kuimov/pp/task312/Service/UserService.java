@@ -1,6 +1,6 @@
-package com.example.demo.Service;
+package com.kuimov.pp.task312.Service;
 
-import com.example.demo.models.User;
+import com.kuimov.pp.task312.models.User;
 
 import java.util.List;
 

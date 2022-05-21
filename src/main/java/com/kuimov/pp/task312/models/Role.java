@@ -1,4 +1,4 @@
-package com.example.demo.models;
+package com.kuimov.pp.task312.models;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 

@@ -1,6 +1,6 @@
-package com.example.demo.repository;
+package com.kuimov.pp.task312.repository;
 
-import com.example.demo.models.Role;
+import com.kuimov.pp.task312.models.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Set;

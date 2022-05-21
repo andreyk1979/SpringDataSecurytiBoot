@@ -1,7 +1,7 @@
-package com.example.demo.Service;
+package com.kuimov.pp.task312.Service;
 
-import com.example.demo.models.User;
-import com.example.demo.repository.UserRepository;
+import com.kuimov.pp.task312.models.User;
+import com.kuimov.pp.task312.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
