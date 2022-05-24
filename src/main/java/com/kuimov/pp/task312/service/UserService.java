@@ -1,4 +1,4 @@
-package com.kuimov.pp.task312.Service;
+package com.kuimov.pp.task312.service;
 
 import com.kuimov.pp.task312.models.User;
 

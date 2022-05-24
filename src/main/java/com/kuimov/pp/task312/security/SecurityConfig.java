@@ -1,8 +1,8 @@
-package com.kuimov.pp.task312.Security;
+package com.kuimov.pp.task312.security;
 
-import com.kuimov.pp.task312.Service.RoleService;
-import com.kuimov.pp.task312.Service.UserDetailsServiceImpl;
-import com.kuimov.pp.task312.Service.UserService;
+import com.kuimov.pp.task312.service.RoleService;
+import com.kuimov.pp.task312.service.UserDetailsServiceImpl;
+import com.kuimov.pp.task312.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

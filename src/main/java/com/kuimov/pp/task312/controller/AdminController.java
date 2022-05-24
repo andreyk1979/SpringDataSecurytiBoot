@@ -1,7 +1,7 @@
 package com.kuimov.pp.task312.controller;
 
-import com.kuimov.pp.task312.Service.RoleService;
-import com.kuimov.pp.task312.Service.UserService;
+import com.kuimov.pp.task312.service.RoleService;
+import com.kuimov.pp.task312.service.UserService;
 import com.kuimov.pp.task312.models.Role;
 import com.kuimov.pp.task312.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
